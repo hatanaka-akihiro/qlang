@@ -13,6 +13,8 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <graalvm.version>22.2.0</graalvm.version>
+        <jar.dir>${project.build.directory}/jars</jar.dir>
+        <test.argLine>--upgrade-module-path='${jar.dir}/truffle-api.jar' --add-opens org.graalvm.sdk/org.graalvm.polyglot=ALL-UNNAMED --add-exports java.base/jdk.internal.module=ALL-UNNAMED</test.argLine>
     </properties>
     <build>
         <plugins>
@@ -52,7 +54,7 @@
                         <include>**/*TestSuite.java</include>
                         <include>**/*Test.java</include>
                     </includes>
-                    <argLine>-Dgraalvm.locatorDisabled=true ${argLine}</argLine>
+                    <argLine>-Dgraalvm.locatorDisabled=true ${test.argLine}</argLine>
                 </configuration>
             </plugin>
         </plugins>
